@@ -21,13 +21,13 @@ plugin_version = "1.0.0"
 plugin_description = """Learning how to create a plugin using "Hello World" for OctoPrint"""
 
 # The plugin's author. Can be overwritten within OctoPrint's internal data via __plugin_author__ in the plugin module
-plugin_author = "You"
+plugin_author = "Fabian Cnyrim"
 
 # The plugin's author's mail address.
 plugin_author_email = "info@wirestyle.de"
 
 # The plugin's homepage URL. Can be overwritten within OctoPrint's internal data via __plugin_url__ in the plugin module
-plugin_url = "https://github.com/heiesch/OctoPrint-QRprint"
+plugin_url = "https://github.com/heieisch/QRprint"
 
 # The plugin's license. Can be overwritten within OctoPrint's internal data via __plugin_license__ in the plugin module
 plugin_license = "AGPLv3"
