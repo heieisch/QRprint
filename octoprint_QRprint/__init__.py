@@ -19,28 +19,30 @@ class QRprintPlugin(occtoprint.plugin.SettingsPlugin,
 
     def get_settings_defaults(self):
         return dict(qp_url="https://en.wikipedia.org/wiki/Hello_world",
-									 qp_copydir="smb://fileserver/data",
-									 qp_localdir="/qrprint/"
+		    qp_copydir="smb://fileserver/data",
+		    qp_localdir="/qrprint/",
+		    qp_sufix="/qrprint/"
 									 )
 
     def get_template_vars(self):
         return dict(url=self._settings.get(["url"])
 			
-		def start_next_print(self):
-		
-				sd = False
-				if queue[0]["sd"] == "true":
-					sd = True
+		    
+    def start_next_print(self):
+		sd = True
+		    source= qp_copydir + qp_input + qp_sufix
+		    dest=qp_localdir + qp_input + qp_sufix
 				try:
-					self._printer.select_file(queue[0]["path"], sd)
-					self._logger.info(queue[0]["path"])
+		    			self._printer.copy_file(surce, dest)
+		    			self._logger.info("copying file")
+					self._printer.select_file(dest, sd)
+					self._logger.info("selecting file")
 					self._printer.start_print()
 				except InvalidFileLocation:
 					self._plugin_manager.send_plugin_message(self._identifier, dict(type="popup", msg="ERROR file not found"))
 				except InvalidFileType:
 					self._plugin_manager.send_plugin_message(self._identifier, dict(type="popup", msg="ERROR file not gcode"))
-			else:
-				self.complete_queue()
+		
 			
 
 										
