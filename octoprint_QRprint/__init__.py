@@ -19,13 +19,6 @@ class QRprintPlugin(occtoprint.plugin.SettingsPlugin,
 		    qp_sufix=".g" 
 	)
 
-
-
-def on_after_startup(self):
-        self._logger.info("QRprint enabled")
-
-   
-
 def get_template_vars(self):
         return dict(qp_copydir=self._settings.get(["qp_copydir"]),
 		    qp_localdir=self._settings.get(["qp_localdir"]),
