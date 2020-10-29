@@ -15,17 +15,19 @@ class QRprintPlugin(occtoprint.plugin.SettingsPlugin,
 	
 	
     def on_after_startup(self):
-        self._logger.info("QRprint enabled (test url: %s)" % self._settings.get(["url"]))
+        self._logger.info("QRprint enabled")
 
     def get_settings_defaults(self):
         return dict(qp_url="https://en.wikipedia.org/wiki/Hello_world",
 		    qp_copydir="smb://fileserver/data",
 		    qp_localdir="/qrprint/",
-		    qp_sufix="/qrprint/"
-									 )
+		    qp_sufix="/qrprint/" )
 
     def get_template_vars(self):
-        return dict(url=self._settings.get(["url"])
+        return dict(url=self._settings.get(["url"],
+		    qp_copydir=self._settings.get(["qp_copydir"],
+		    qp_localdir=self._settings.get(["qp_localdir"],
+		    qp_sufix=self._settings.get(["qp_sufix"])
 			
 		    
     def start_next_print(self):
