@@ -23,14 +23,14 @@ class QRprintPlugin(occtoprint.plugin.SettingsPlugin,
 
    
     def get_template_vars(self):
-        return dict(qp_copydir=self._settings.get(["qp_copydir"],
-		    qp_localdir=self._settings.get(["qp_localdir"],
+        return dict(qp_copydir=self._settings.get(["qp_copydir"]),
+		    qp_localdir=self._settings.get(["qp_localdir"]),
 		    qp_sufix=self._settings.get(["qp_sufix"])
     
     def get_template_configs(self):
 		return [
 			dict(type="settings", custom_bindings=False, template="qrprint_settings.jinja2"),
-			dict(type="tab", custom_bindings=False, template="qrprint_tab.jinja2"
+			dict(type="tab", custom_bindings=False, template="qrprint_tab.jinja2")
 			]		
 		    
     def start_next_print(self):
