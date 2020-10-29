@@ -86,5 +86,5 @@ def get_template_configs(self):
 										
 										
 __plugin_name__ = "QRprint"
-__plugin_pythoncompat__ = ">=2.7,<4" # python 2 and 3
+__plugin_pythoncompat__ = ">=3,<4" # python 2 and 3
 __plugin_implementation__ = QRprintPlugin()
