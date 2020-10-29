@@ -13,16 +13,20 @@ class QRprintPlugin(occtoprint.plugin.SettingsPlugin,
 							octoprint.plugin.BlueprintPlugin,
 							octoprint.plugin.EventHandlerPlugin):
     def get_settings_defaults(self):
-        return dict(qp_copydir="smb://fileserver/data",
+        return dict(
+		qp_copydir="smb://fileserver/data",
 		    qp_localdir="/qrprint/",
-		    qp_sufix=".g" )
+		    qp_sufix=".g" 
+	)
 
-	
-    def on_after_startup(self):
+
+
+def on_after_startup(self):
         self._logger.info("QRprint enabled")
 
    
-    def get_template_vars(self):
+
+def get_template_vars(self):
         return dict(qp_copydir=self._settings.get(["qp_copydir"]),
 		    qp_localdir=self._settings.get(["qp_localdir"]),
 		    qp_sufix=self._settings.get(["qp_sufix"])
