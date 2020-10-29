@@ -47,7 +47,8 @@ class QRprintPlugin(occtoprint.plugin.SettingsPlugin,
 def get_template_configs(self):
 		return [
 			dict(type="settings", custom_bindings=False, template="qrprint_settings.jinja2"),
-			dict(type="tab", custom_bindings=False, template="qrprint_tab.jinja2")
+			dict(type="tab", custom_bindings=False, template="qrprint_tab.jinja2",
+			dict(type="nav", custom_bindings=False, template="qrprint_nav.jinja2"    )
 		]
 
 	##~~ AssetPlugin
