@@ -12,21 +12,26 @@ class QRprintPlugin(occtoprint.plugin.SettingsPlugin,
 							octoprint.plugin.StartupPlugin,
 							octoprint.plugin.BlueprintPlugin,
 							octoprint.plugin.EventHandlerPlugin):
-	
-	
-    def on_after_startup(self):
-        self._logger.info("QRprint enabled")
-
     def get_settings_defaults(self):
         return dict(qp_copydir="smb://fileserver/data",
 		    qp_localdir="/qrprint/",
 		    qp_sufix=".g" )
 
+	
+    def on_after_startup(self):
+        self._logger.info("QRprint enabled")
+
+   
     def get_template_vars(self):
         return dict(qp_copydir=self._settings.get(["qp_copydir"],
 		    qp_localdir=self._settings.get(["qp_localdir"],
 		    qp_sufix=self._settings.get(["qp_sufix"])
-			
+    
+    def get_template_configs(self):
+		return [
+			dict(type="settings", custom_bindings=False, template="qrprint_settings.jinja2"),
+			dict(type="tab", custom_bindings=False, template="qrprint_tab.jinja2"
+			]		
 		    
     def start_next_print(self):
 		sd = True
@@ -47,11 +52,7 @@ class QRprintPlugin(occtoprint.plugin.SettingsPlugin,
 			
 
 										
-def get_template_configs(self):
-		return [
-			dict(type="settings", custom_bindings=False, template="qrprint_settings.jinja2"),
-			dict(type="tab", custom_bindings=False, template="qrprint_tab.jinja2"
-			]
+
 
 	##~~ AssetPlugin
 #	def get_assets(self):
@@ -84,4 +85,12 @@ def get_template_configs(self):
 										
 __plugin_name__ = "QRprint"
 __plugin_pythoncompat__ = ">=3,<4" # python 3
-__plugin_implementation__ = QRprintPlugin()
+
+   def __plugin_load__():
+	global __plugin_implementation__
+	__plugin_implementation__ = QRprintPlugin()
+
+	global __plugin_hooks__
+	__plugin_hooks__ = {
+		"octoprint.plugin.softwareupdate.check_config": __plugin_implementation__.get_update_information
+	} 
