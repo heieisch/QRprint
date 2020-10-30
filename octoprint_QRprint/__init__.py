@@ -37,7 +37,7 @@ def get_template_vars(self):
 		    qr_input="test"
 		    source= qp_copydir + qp_input + qp_sufix
 		    dest=qp_localdir + qp_input + qp_sufix
-				if true:
+				
 				try:
 		    			self._printer.copy_file(surce, dest)
 		    			self._logger.info("copying file")
