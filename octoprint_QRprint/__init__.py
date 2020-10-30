@@ -34,7 +34,7 @@ def get_template_vars(self):
 		    
     def start_next_print(self):
 		sd = True
-		    #qr_input=
+		    qr_input="test"
 		    source= qp_copydir + qp_input + qp_sufix
 		    dest=qp_localdir + qp_input + qp_sufix
 				try:
