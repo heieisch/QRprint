@@ -27,10 +27,10 @@ def get_template_vars(self):
 		   )
     
     def get_template_configs(self):
-		return [
+		return (
 			dict(type="settings", custom_bindings=False, template="qrprint_settings.jinja2"),
 			dict(type="tab", custom_bindings=False, template="qrprint_tab.jinja2")
-			]		
+		)		
 		    
     def start_next_print(self):
 		sd = True
