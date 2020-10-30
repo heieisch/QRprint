@@ -20,9 +20,11 @@ class QRprintPlugin(occtoprint.plugin.SettingsPlugin,
 	)
 
 def get_template_vars(self):
-        return dict(qp_copydir=self._settings.get(["qp_copydir"]),
+        return dict(
+		qp_copydir=self._settings.get(["qp_copydir"]),
 		    qp_localdir=self._settings.get(["qp_localdir"]),
 		    qp_sufix=self._settings.get(["qp_sufix"])
+		   )
     
     def get_template_configs(self):
 		return [
