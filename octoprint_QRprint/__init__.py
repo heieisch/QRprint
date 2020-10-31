@@ -12,35 +12,42 @@ class QRprintPlugin(occtoprint.plugin.SettingsPlugin,
 							octoprint.plugin.StartupPlugin,
 							octoprint.plugin.BlueprintPlugin,
 							octoprint.plugin.EventHandlerPlugin):
-    def get_settings_defaults(self):
+    
+#Definiert die stat besestung der Variabeln
+def get_settings_defaults(self):
         return dict(
 		qp_copydir="smb://fileserver/data",
 		    qp_localdir="/qrprint/",
 		    qp_sufix=".g" 
 	)
 
+#wird vom Eintellungsdialog aufgerufen um die Variabeln zu ändern
 def get_template_vars(self):
         return dict(
 		qp_copydir=self._settings.get(["qp_copydir"]),
 		    qp_localdir=self._settings.get(["qp_localdir"]),
 		    qp_sufix=self._settings.get(["qp_sufix"])
 		   )
-    
-    def get_template_configs(self):
+
+#Bindet die UI elemente ein
+def get_template_configs(self):
 		return (
 			dict(type="settings", custom_bindings=False, template="qrprint_settings.jinja2"),
 			dict(type="tab", custom_bindings=False, template="qrprint_tab.jinja2")
 		)		
 		    
-    def start_next_print(self):
+
+#Hauptfunktoion die von dem Eingabefeld für den QR scaner aufgerufen wird		
+def start_next_print(self):
 		sd = True
-		    qr_input="test"
+		    qr_input="test". #self.get eingabefeld außlesen
 		    source= qp_copydir + qp_input + qp_sufix
 		    dest=qp_localdir + qp_input + qp_sufix
 				
 				try:
-		    			self._printer.copy_file(surce, dest)
-		    			self._logger.info("copying file")
+					#zu debugging zwcken auskommentiert
+		    			#self._printer.copy_file(surce, dest)
+		    			#self._logger.info("copying file")
 					self._printer.select_file(dest, sd)
 					self._logger.info("selecting file")
 					self._printer.start_print()
@@ -54,14 +61,14 @@ def get_template_vars(self):
 										
 
 
-	##~~ AssetPlugin
+	##~~ AssetPlugin. js brauche ich erstmal noch nicht
 #	def get_assets(self):
 #		return dict(
 #			js=["js/continuousprint.js"]
 #		)
 
 
-	##~~ Softwareupdate hook
+	##~~ Softwareupdate hook um automatische update zu machen
 	def get_update_information(self):
 		# Define the configuration for your plugin to use with the Software Update
 		# Plugin here. See https://docs.octoprint.org/en/master/bundledplugins/softwareupdate.html
